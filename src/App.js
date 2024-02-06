@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import AuthForm from "./components/AuthForm";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import MainPage from "./components/MainPage";
+import Protected from "./components/Protected";
+import ErrorPage from "./components/ErrorPage";
 
 function App() {
+  const appRouter = createBrowserRouter([
+    {
+      path: "/",
+      element: <AuthForm />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: "/main",
+      element: <Protected component={MainPage} />,
+    },
+  ]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <RouterProvider router={appRouter}></RouterProvider>
     </div>
   );
 }
