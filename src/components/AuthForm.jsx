@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import CustomInput from "./CustomInput.jsx";
 
 const AuthForm = () => {
+  // eslint-disable-next-line no-undef
+  const apiURL = process.env.REACT_APP_API_URL;
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -23,14 +25,14 @@ const AuthForm = () => {
     try {
       let res;
       if (isLogIn) {
-        res = await axios.post("http://localhost:5000/api/auth/login", {
+        res = await axios.post(apiURL + "/api/auth/login", {
           email,
           password,
         });
         localStorage.setItem("userToken", res?.data?.token);
         navigate("main");
       } else {
-        res = await axios.post("http://localhost:5000/api/auth/register", {
+        res = await axios.post(apiURL + "/api/auth/register", {
           firstName,
           lastName,
           email,
